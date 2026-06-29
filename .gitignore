@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+.venv-databricks/
+venv/
+env/
+
+# Environment / secrets
+.env
+.databrickscfg
+
+# Data — never commit raw or derived data (fetched on demand)
+data/
+*.parquet
+*.delta
+spark-warehouse/
+metastore_db/
+derby.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml

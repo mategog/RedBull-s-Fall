@@ -1,0 +1,14 @@
+# Databricks Connect environment (.venv-databricks)
+# ONLY for running the pipeline against Databricks Free Edition (serverless).
+#
+# Keep this in a SEPARATE virtualenv from requirements.txt.
+# databricks-connect bundles its own Spark API and conflicts with a
+# standalone pyspark install in the same environment.
+#
+# Version note: for serverless compute, use the LATEST databricks-connect.
+# Serverless auto-selects its environment version, so you do not pin to a
+# specific cluster runtime here. Bump this when you hit a version warning.
+
+databricks-connect>=16.1,<17    # connects local code to Free Edition serverless
+requests==2.32.5
+python-dotenv==1.1.1

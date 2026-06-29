@@ -1,0 +1,18 @@
+# Local development environment (.venv)
+# Fast, offline PySpark for writing and unit-testing pipeline logic.
+#
+# IMPORTANT: do NOT install databricks-connect in this venv.
+# pyspark and databricks-connect both provide the `pyspark` package and
+# will clash on import. Databricks Connect lives in a separate venv
+# (see requirements-databricks.txt).
+
+pyspark==3.5.7          # local Spark engine; 3.5.x is the current stable line
+requests==2.32.5        # OpenF1 / Jolpica HTTP clients
+python-dotenv==1.1.1    # load .env in local runs
+streamlit==1.50.0       # the UI
+pandas==2.3.3           # Streamlit-side dataframes, small joins
+plotly==6.3.1           # charts in the UI
+
+# Dev tooling
+pytest==8.4.2
+ruff==0.14.0            # linter + formatter (replaces black + flake8)

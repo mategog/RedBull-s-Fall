@@ -53,7 +53,7 @@ re-runnable. Silver normalizes and joins; Gold holds the analysis-ready aggregat
 | Layer        | Tool                                   |
 |--------------|----------------------------------------|
 | Data sources | OpenF1 API + Jolpica F1 API            |
-| Pipeline     | PySpark on Databricks Community Edition |
+| Pipeline     | PySpark on Databricks Free Edition      |
 | Storage      | Delta Lake (medallion architecture)    |
 | UI           | Streamlit (single page)                |
 | Version ctrl | GitHub                                  |
@@ -67,8 +67,8 @@ re-runnable. Silver normalizes and joins; Gold holds the analysis-ready aggregat
 - **Seasons:** 2023–2026
 - **Volume:** ~8 million rows of telemetry
 
-The team set is intentionally limited to the top four to stay within Community Edition cluster
-limits while keeping the narrative focused on the title fight.
+The team set is intentionally limited to the top four to stay within Free Edition's
+serverless quota while keeping the narrative focused on the title fight.
 
 ---
 
@@ -117,7 +117,8 @@ f1-performance-analysis/
 
 ## Running it locally
 
-> **Prerequisites:** Python 3.10+, a Databricks Community Edition workspace (free), and Git.
+> **Prerequisites:** Python 3.10+, a Databricks Free Edition workspace (free), Java 11/17, and Git.
+> Full step-by-step setup (local + Databricks venvs, auth) is in [SETUP.md](SETUP.md).
 
 1. **Clone and install**
    ```bash
@@ -126,10 +127,10 @@ f1-performance-analysis/
    pip install -r requirements.txt
    ```
 
-2. **Run the pipeline (Databricks CE)**
+2. **Run the pipeline (Databricks Free Edition)**
 
-   Import the notebooks under `notebooks/` into your Databricks CE workspace and run them in
-   order:
+   Import the notebooks under `notebooks/` into your Databricks Free Edition workspace and run
+   them in order:
    - `01_bronze_ingestion` — pulls from OpenF1 + Jolpica into the Bronze layer
    - `02_silver_transformation` — cleans, normalizes, joins
    - `03_gold_aggregation` — builds the analysis tables the UI consumes
@@ -177,7 +178,7 @@ does **not** run Streamlit without an additional adapter, so it is not the defau
 
 | Limitation                          | Mitigation                                                      |
 |-------------------------------------|----------------------------------------------------------------|
-| Community Edition cluster size      | Scope limited to the top 4 teams; partitioned reads            |
+| Free Edition serverless quota       | Scope limited to the top 4 teams; partitioned reads            |
 | OpenF1 telemetry only from 2023     | Jolpica covers historical season/standings data                |
 | Single maintainer, limited hours    | Scope deliberately not expanded beyond the four-team narrative |
 
