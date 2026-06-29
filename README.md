@@ -37,8 +37,8 @@ Silver  (cleaned, normalized — PySpark)
         ▼
 Gold  (aggregated analyses)
 ├── Championship progression across a season
-├── Straight-line speed trend per team
-├── Cornering vs. straight-line performance
+├── Straight-line speed trend per team (speed trap)
+├── Downforce profile: speed trap vs. sector time per team
 ├── Pit-stop strategy effectiveness
 └── Qualifying vs. race-pace delta
 ```
@@ -69,6 +69,29 @@ re-runnable. Silver normalizes and joins; Gold holds the analysis-ready aggregat
 
 The team set is intentionally limited to the top four to stay within Community Edition cluster
 limits while keeping the narrative focused on the title fight.
+
+---
+
+## Analyzing cornering vs. straight-line performance
+
+A core part of the narrative is *where* a car gains or loses time: on the straights (engine,
+drag, DRS) or through the corners (downforce, mechanical grip). OpenF1 does not expose
+corner-level data — there is no "this is corner 3" signal — so this is inferred, not measured
+directly, from two fields the `laps` endpoint provides per lap:
+
+- **`st_speed`** — speed-trap value at the end of the main straight (straight-line pace)
+- **`duration_sector_1/2/3`** — the three sector times
+
+The signal is the **combination**: a team with a *low speed trap* but *competitive sector times*
+is likely carrying more downforce — slower on the straight, faster where the corners are. This
+separates the two performance domains instead of guessing from overall lap time alone.
+
+**Deliberate limitation:** which sector is "corner-dominant" vs. "straight-dominant" varies by
+circuit (Monza ≠ Monaco), so this project does **not** hard-classify sectors or assume track
+geometry. It reports the speed-trap-vs-sector-time relationship per team and lets the pattern
+speak. This keeps the inference defensible — no claim is made about knowing where corners are on
+the track, only that a low straight-line speed paired with strong sector pace points to a
+downforce-led setup.
 
 ---
 
